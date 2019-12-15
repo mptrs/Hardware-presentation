@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/black.css" />
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css" />
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>Using JavaScript on hardware</h2>
+          <h3>It's not that hard&hellip;</h3>
+          <br />
+          <small>Hi, my name is Michiel</small>
+        </section>
+        <section>
+          <h2>What to expect</h2>
+          <p class="fragment">Small intro on what we need.</p>
+          <p class="fragment">The &ldquo;Hello world&rdquo; of IoT.</p>
+          <p class="fragment">Control hardware from the browser.</p>
+          <aside class="notes">
+            <p>Just to set some expectations</p>
+          </aside>
+        </section>
+        <section>
+          <h2>What do we need?</h2>
+          <ul>
+            <li class="fragment">NodeJS</li>
+            <li class="fragment">Hardware</li>
+            <ul class="fragment">
+              <li>Arduino</li>
+              <li>Raspberry Pi</li>
+              <li>Tessel 2</li>
+              <li>Intel Edison</li>
+              <li>...</li>
+            </ul>
+          </ul>
+          <aside class="notes">
+            <p>...and the most important -></p>
+          </aside>
+        </section>
+        <section>
+          <section
+            data-background-transition="zoom"
+            data-background="css/pcb.jpg"
+            data-background-repeat="repeat"
+            data-background-size="auto"
+          >
+            <h2>Johnny-five.io</h2>
+            <p>Johnny-Five is the JavaScript Robotics & IoT Platform.</p>
+            <p>An easy way for controlling hardware.</p>
+            <!-- <p class="fragment">Arduino-compatible Boards. For non-Arduino based projects there IO Plugins are available.</p> -->
+            <aside class="notes">
+              <p>Inspired by the web, there are events, callbacks.</p>
+              <p>The name is a reference to</p>
+              <p>||press down||</p>
+            </aside>
+          </section>
+          <section
+            data-background-transition="zoom"
+            data-background="css/johnny-five.jpg"
+            data-background-size="contain"
+          >
+            <aside class="notes">
+              <p>fictional robotic star of the movie Short Circuit</p>
+            </aside>
+          </section>
+        </section>
+        <section>
+					<section>
+          <h2>&ldquo;Hello world&rdquo;</h2>
+          <pre>
+						<code data-trim data-line-numbers="8-11">
+								const { RaspiIO } = require('raspi-io');
+								const five = require('johnny-five');
+								
+								const board = new five.Board({
+									io: new RaspiIO()
+								});
+								
+								board.on('ready', () => {
+									const led = new five.Led('P1-12');
+									led.blink();
+								});
+
+						</code>
+					</pre>
+					<aside class="notes">
+						<ul>
+							<li>we import the libraries</li>
+							<li>and the highlited code does the magic</li>
+							<li>it creates a new led object</li>
+							<li>sets the correct pin</li>
+							<li>--- DOWN for pins ---</li>
+							<li>P1 is specific for the Raspberry Pi, it's header 1</li>
+							<li>12 is the actual pin</li>
+						</ul>
+						</aside>
+					</section>
+					<section data-background="css/pi-pins.png" data-background-size="contain">
+					</section>
+        </section>
+        <section>
+          <section>
+            <h2>And now something useful</h2>
+          </section>
+          <section>
+            <h2>I hope this works 🤞</h2>
+          </section>
+          <!-- insert ip of the running demo -->
+          <section
+            data-background-iframe="http://ipofthedevice"
+            data-background-interactive
+          ></section>
+        </section>
+        <section>
+          <h2>Resources</h2>
+          <ul>
+            <li><a href="https://johnny-five.io/">Johnny-five.io</a></li>
+            <li><a href="https://www.hackster.io/IainIsCreative/javascript-with-hardware-part-zero-javascript-nodebots-31c72d">JavaScript with hardware</a></li>
+            <li><a href="https://nodebots.io/">Nodebots.io</a></li>
+            <li><a href="https://www.hackster.io/johnny-five/projects">Johnny-five projects on Hackster.io</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        dependencies: [
+          { src: "plugin/markdown/marked.js" },
+          { src: "plugin/markdown/markdown.js" },
+          { src: "plugin/notes/notes.js", async: true },
+          { src: "plugin/highlight/highlight.js", async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
